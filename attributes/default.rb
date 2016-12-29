@@ -14,12 +14,18 @@ else
   pool_conf_dir = "/etc/php5/fpm/pool.d"
   if node.platform == "ubuntu" and node.platform_version.to_f <= 10.04
     conf_file = "/etc/php5/fpm/php5-fpm.conf"
+  elsif node.platform == "ubuntu" && node.platform_version.to_f >= 16 
+    conf_file = "/etc/php/7.0/fpm/php-fpm.conf"
+    conf_dir = "/etc/php/7.0/fpm/conf.d"
+    pool_conf_dir = "/etc/php/7.0/fpm/pool.d"
   else
     conf_file = "/etc/php5/fpm/php-fpm.conf"
   end
   error_log = "/var/log/php5-fpm.log"
   pid ="/var/run/php5-fpm.pid"
 end
+
+
 
 default['php-fpm']['user'] = user
 default['php-fpm']['group'] = group
